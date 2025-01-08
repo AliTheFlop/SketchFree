@@ -1,15 +1,60 @@
 "use client";
-import Input from "@/components/Input";
+import RenderContainer from "@/components/RenderContainer";
 import { useState } from "react";
 
-// React handles DOM, so NO getElementById.
-// For dragging and that im not sure how it will work
-// Buuut we'll figure it out >:D
+function makeid(length) {
+    let result = "";
+    const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+        result += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+        );
+        counter += 1;
+    }
+    return result;
+}
 
 export default function Editor() {
-    const [item, setItem] = useState([]);
+    const [pageElements, setPageElements] = useState({
+        elements: [
+            {
+                id: "g4d3tdh6",
+                type: "h1",
+                content: "John Cena 2",
+                styles: { fontSize: "72px", fontWeight: "bold" },
+            },
+            {
+                id: "gf4g39d2",
+                type: "h2",
+                content: "John Cena 2",
+                styles: { fontSize: "24px", fontWeight: "bold" },
+            },
+            {
+                id: "g4d3thh6",
+                type: "div",
+                content: null,
+                styles: {
+                    fontSize: "12px",
+                    fontWeight: "medium",
+                    border: "1px solid pink",
+                },
+                children: [
+                    {
+                        id: "fkeopt4",
+                        type: "h2",
+                        content: "I'm in a div",
+                        styles: { fontSize: "36px" },
+                    },
+                ],
+            },
+        ],
+        activeElement: null,
+    });
+
     function dragStartHandler(e) {
-        // Data is fine, we can get the specific thing (p h1 h2 etc) and have that in setData to specify what we're adding to the editor
         const content = JSON.stringify({
             tag: e.target.tagName,
             content: e.target.innerHTML,
@@ -33,9 +78,10 @@ export default function Editor() {
         const newItem = { tagLower, child };
         console.log(newItem);
 
-        setItem((prev) => {
+        /*
+        setPageElements((prev) => {
             return [...prev, newItem];
-        });
+        }); */
     }
 
     return (
@@ -45,21 +91,22 @@ export default function Editor() {
                     draggable="true"
                     onDragStart={dragStartHandler}
                     placeholder="type something"
-                >
-                    Joe
-                </h1>
+                    contentEditable="true"
+                    className="outline"
+                ></h1>
             </div>
             <div
                 className="outline w-72 h-72 "
                 onDrop={dropHandler}
                 onDragOver={dragOverHandler}
             >
-                {item.length > 0
-                    ? item.map((items) => (
-                          <Input
-                              type={items.tagLower}
-                              key="johhnnyy"
-                              content={items.child}
+                {pageElements.elements
+                    ? pageElements.elements.map((element) => (
+                          <RenderContainer
+                              key={element.id}
+                              type={element.type}
+                              content={element.content}
+                              children={element.children ?? null}
                           />
                       ))
                     : "No items yet"}
