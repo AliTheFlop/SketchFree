@@ -14,6 +14,7 @@ let page = [
                 backgroundColor: "white",
                 boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
             },
+            id: "nav_wrapper",
         },
         children: [
             {
@@ -77,6 +78,7 @@ let page = [
                                 borderRadius: "6px",
                                 cursor: "pointer",
                             },
+                            id: "link_3",
                         },
                     },
                 ],
@@ -131,6 +133,21 @@ let page = [
                                 fontSize: "20px",
                                 color: "#666",
                                 marginBottom: "32px",
+                            },
+                        },
+                    },
+                    {
+                        id: "hero_button",
+                        type: "button",
+                        content: "Get Started",
+                        props: {
+                            style: {
+                                backgroundColor: "#007AFF",
+                                color: "white",
+                                padding: "10px 20px",
+                                border: "none",
+                                borderRadius: "6px",
+                                cursor: "pointer",
                             },
                         },
                     },

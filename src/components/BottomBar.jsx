@@ -1,5 +1,12 @@
+import makeid from "@/lib/makeid";
+
 function onDrag(e, type) {
-    e.dataTransfer.setData("element", type);
+    const elementData = {
+        id: makeid(7),
+        type: type,
+    };
+
+    e.dataTransfer.setData("element", JSON.stringify(elementData));
 }
 
 export default function BottomBar() {
@@ -13,7 +20,7 @@ export default function BottomBar() {
                 className="px-3 py-1.5 text-lg text-gray-600 hover:bg-gray-100 rounded-full 
         transition-all duration-200"
                 draggable
-                onDrag={(e) => onDrag(e, "h1")}
+                onDragStart={(e) => onDrag(e, "h1")}
             >
                 Heading
             </button>
@@ -21,7 +28,7 @@ export default function BottomBar() {
                 className="px-3 py-1.5 text-lg text-gray-600 hover:bg-gray-100 rounded-full 
         transition-all duration-200"
                 draggable
-                onDrag={(e) => onDrag(e, "p")}
+                onDragStart={(e) => onDrag(e, "p")}
             >
                 Paragraph
             </button>
@@ -29,7 +36,7 @@ export default function BottomBar() {
                 className="px-3 py-1.5 text-lg text-gray-600 hover:bg-gray-100 rounded-full 
         transition-all duration-200"
                 draggable
-                onDrag={(e) => onDrag(e, "div")}
+                onDragStart={(e) => onDrag(e, "div")}
             >
                 Container
             </button>
@@ -37,7 +44,7 @@ export default function BottomBar() {
                 className="px-3 py-1.5 text-lg text-gray-600 hover:bg-gray-100 rounded-full 
         transition-all duration-200"
                 draggable
-                onDrag={(e) => onDrag(e, "button")}
+                onDragStart={(e) => onDrag(e, "button")}
             >
                 Button
             </button>
