@@ -10,7 +10,7 @@ function getElement(type, id) {
                         fontSize: "24px",
                         fontWeight: "bold",
                     },
-                    contentEditable: "true",
+
                     id: id,
                 },
                 content: "SketchFree",
@@ -24,7 +24,7 @@ function getElement(type, id) {
                         color: "#333",
                         fontSize: "16px",
                     },
-                    contentEditable: "true",
+
                     id: id,
                 },
                 content: "Edit Me!",
@@ -60,7 +60,6 @@ function getElement(type, id) {
                     },
 
                     id: id,
-                    contentEditable: "true",
                 },
                 content: "Edit Me!",
             };

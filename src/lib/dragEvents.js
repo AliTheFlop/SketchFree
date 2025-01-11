@@ -31,10 +31,10 @@ function handleHoverOverElement(e) {
     const y = e.clientY - rect.top; // Mouse on Y of rect
     const height = (100 * y) / rect.height; // Mouse Y coords on Rect
 
-    if (height <= 40) {
+    if (height <= 50) {
         div.classList.remove("dragover-bottom");
         div.classList.add("dragover-top");
-    } else if (height >= 60) {
+    } else if (height > 50) {
         div.classList.remove("dragover-top");
         div.classList.add("dragover-bottom");
     }

@@ -1,5 +1,4 @@
 import { onDrag } from "@/lib/dragEvents";
-import { useState } from "react";
 
 export default function BottomBar({ activeElementRef }) {
     return (

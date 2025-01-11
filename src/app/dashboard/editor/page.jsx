@@ -1,6 +1,5 @@
 "use client";
 import RenderChildren from "@/components/RenderChildren";
-import BottomBar from "@/components/BottomBar";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import {
@@ -8,6 +7,7 @@ import {
     handleOnDropElement,
     handleHoverOverElement,
 } from "@/lib/dragEvents";
+import Sidebar from "@/components/Sidebar";
 
 async function saveData(user_id, name, content) {
     try {
@@ -21,8 +21,39 @@ async function saveData(user_id, name, content) {
     }
 }
 
+function createStyles(editableStyles) {
+    let cssString = "";
+
+    editableStyles.forEach((styleClass) => {
+        console.log(styleClass);
+
+        let classCss = Object.entries(styleClass.styles)
+            .map(([key, value]) => {
+                return `    ${key}: ${value};`;
+            })
+            .join("\n");
+
+        cssString += `.${styleClass.class} {\n${classCss}\n}\n`;
+    });
+
+    return (
+        <style jsx global>{`
+            ${cssString.trim()}
+        `}</style>
+    );
+}
+
+function handleHoverOver(e) {
+    e.target.classList.add("hoverover");
+}
+
+function handleHoverOut(e) {
+    e.target.classList.remove("hoverover");
+}
+
 export default function Editor() {
     const [editableElements, setEditableElements] = useState([]);
+    const [editableStyles, setEditableStyles] = useState([]);
     const activeElementRef = useRef(null);
     const [activeElementRefresh, setActiveElementRefresh] = useState(false);
     const user_id = "dbb4df83-03d2-4418-a662-39ebb9a24a5d";
@@ -30,11 +61,6 @@ export default function Editor() {
 
     function setActiveElementRef(element) {
         activeElementRef.current = element;
-        console.log(activeElementRef);
-    }
-
-    function refreshActiveElement() {
-        setActiveElementRefresh((prev) => !prev);
     }
 
     useEffect(() => {
@@ -44,13 +70,16 @@ export default function Editor() {
                     "http://localhost:4000/api/getSite/a64a33ab-a1b0-41e8-a5ab-4eb35635fe93"
                 );
 
-                setEditableElements(response.data.rows[0].content);
+                setEditableElements(response.data.rows[0].content.elements);
+                setEditableStyles(response.data.rows[0].content.styles);
             } catch (err) {
                 throw err;
             }
         }
         getData();
     }, []);
+
+    const styles = createStyles(editableStyles);
 
     return (
         <>
@@ -65,16 +94,19 @@ export default function Editor() {
                     )
                 }
                 onClick={(e) => setActiveElementRef(e.target)}
+                onMouseOver={handleHoverOver}
+                onMouseOut={handleHoverOut}
                 className="main-div"
             >
+                {styles}
                 <div
                     className="editor-container"
-                    onClick={setActiveElementRefresh}
+                    onClick={() => setActiveElementRefresh((prev) => !prev)}
                 >
                     <RenderChildren elements={editableElements} />
                 </div>
             </div>
-            <BottomBar activeElementRef={activeElementRef} />
+            <Sidebar activeElementRef={activeElementRef} />
         </>
     );
 }

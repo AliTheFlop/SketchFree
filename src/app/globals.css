@@ -27,3 +27,7 @@ body {
 .dragover-bottom {
     border-bottom: 2px solid blue;
 }
+
+.hoverover {
+    border: 1px solid gray;
+}
