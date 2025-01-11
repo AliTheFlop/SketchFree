@@ -1,13 +1,4 @@
-import makeid from "@/lib/makeid";
-
-function onDrag(e, type) {
-    const elementData = {
-        id: makeid(7),
-        type: type,
-    };
-
-    e.dataTransfer.setData("element", JSON.stringify(elementData));
-}
+import { onDrag } from "@/lib/dragEvents";
 
 export default function BottomBar() {
     return (

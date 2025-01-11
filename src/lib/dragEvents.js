@@ -1,3 +1,18 @@
+function makeid(length) {
+    let result = "";
+    const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+        result += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+        );
+        counter += 1;
+    }
+    return result;
+}
+
 function handleHoverOverElement(e) {
     e.preventDefault();
     const div = document.elementFromPoint(e.clientX, e.clientY);
@@ -31,8 +46,11 @@ function handleOnDropElement(e, editableElements, setEditableElements) {
 
     const div = e.target;
     if (!div) return;
-
-    console.log(e.dataTransfer.getData("element"));
+    if (!div.id) {
+        console.log("No div id!");
+        handleHoverOutOfElement(e);
+        return;
+    }
 
     const data = JSON.parse(e.dataTransfer.getData("element"));
 
@@ -68,8 +86,18 @@ function handleOnDropElement(e, editableElements, setEditableElements) {
     handleHoverOutOfElement(e);
 }
 
+function onDrag(e, type) {
+    const elementData = {
+        id: makeid(7),
+        type: type,
+    };
+
+    e.dataTransfer.setData("element", JSON.stringify(elementData));
+}
+
 module.exports = {
     handleHoverOutOfElement,
     handleHoverOverElement,
     handleOnDropElement,
+    onDrag,
 };

@@ -13,18 +13,24 @@ export default function Editor() {
     const [editableElements, setEditableElements] = useState(elements);
 
     return (
-        <div
-            onDragOver={handleHoverOverElement}
-            onDragLeave={handleHoverOutOfElement}
-            onDrop={(e) =>
-                handleOnDropElement(e, editableElements, setEditableElements)
-            }
-            className="main-div"
-        >
-            <div className="editor-container">
-                <RenderChildren elements={elements} />
+        <>
+            <div
+                onDragOver={handleHoverOverElement}
+                onDragLeave={handleHoverOutOfElement}
+                onDrop={(e) =>
+                    handleOnDropElement(
+                        e,
+                        editableElements,
+                        setEditableElements
+                    )
+                }
+                className="main-div"
+            >
+                <div className="editor-container">
+                    <RenderChildren elements={editableElements} />
+                </div>
             </div>
             <BottomBar />
-        </div>
+        </>
     );
 }
