@@ -1,3 +1,11 @@
+import getElement from "./getElement";
+import findItemRecursive from "./recursiveItem";
+
+function onDrag(e, type) {
+    const elementData = getElement(type, makeid(7));
+    e.dataTransfer.setData("element", JSON.stringify(elementData));
+}
+
 function makeid(length) {
     let result = "";
     const characters =
@@ -54,7 +62,7 @@ function handleOnDropElement(e, editableElements, setEditableElements) {
 
     const data = JSON.parse(e.dataTransfer.getData("element"));
 
-    const findItem = editableElements.find((x) => x.id === div.id);
+    const findItem = findItemRecursive(editableElements, div.id);
 
     // Find Height Of Mouse To Drop Item
 
@@ -63,36 +71,43 @@ function handleOnDropElement(e, editableElements, setEditableElements) {
     const y = e.clientY - rect.top; // Mouse on Y of rect
     const height = (100 * y) / rect.height; // Mouse Y coords on Rect
 
-    if (height <= 50) {
-        setEditableElements((prev) => {
-            const index = prev.findIndex(
-                (element) => element.id === findItem.id
-            );
-            const newElements = [...prev];
-            newElements.splice(index, 0, data);
-            return newElements;
-        });
-    } else if (height > 50) {
-        setEditableElements((prev) => {
-            const index = prev.findIndex(
-                (element) => element.id === findItem.id
-            );
-            const newElements = [...prev];
-            newElements.splice(index + 1, 0, data);
-            return newElements;
-        });
+    function updateNestedElements(elements, targetId, insertBefore) {
+        return elements
+            .map((element) => {
+                // If this is the target element
+                if (element.id === targetId) {
+                    return insertBefore ? [data, element] : [element, data];
+                }
+
+                // If this element has children, recursively search them
+                if (element.children && element.children.length > 0) {
+                    return {
+                        ...element,
+                        children: updateNestedElements(
+                            element.children,
+                            targetId,
+                            insertBefore
+                        ),
+                    };
+                }
+
+                return element;
+            })
+            .flat();
     }
 
+    setEditableElements((prev) => {
+        // If dropping above element (height <= 50)
+        if (height <= 50) {
+            return updateNestedElements(prev, findItem.id, true);
+        }
+        // If dropping below element (height > 50)
+        else {
+            return updateNestedElements(prev, findItem.id, false);
+        }
+    });
+
     handleHoverOutOfElement(e);
-}
-
-function onDrag(e, type) {
-    const elementData = {
-        id: makeid(7),
-        type: type,
-    };
-
-    e.dataTransfer.setData("element", JSON.stringify(elementData));
 }
 
 module.exports = {

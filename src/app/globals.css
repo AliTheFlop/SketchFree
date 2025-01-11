@@ -27,8 +27,3 @@ body {
 .dragover-bottom {
     border-bottom: 2px solid blue;
 }
-
-.dragover-top,
-.dragover-bottom {
-    transition: border 0.2s ease;
-}
