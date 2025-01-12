@@ -25,8 +25,6 @@ function createStyles(editableStyles) {
     let cssString = "";
 
     editableStyles.forEach((styleClass) => {
-        console.log(styleClass);
-
         let classCss = Object.entries(styleClass.styles)
             .map(([key, value]) => {
                 return `    ${key}: ${value};`;
@@ -54,12 +52,14 @@ function handleHoverOut(e) {
 export default function Editor() {
     const [editableElements, setEditableElements] = useState([]);
     const [editableStyles, setEditableStyles] = useState([]);
-    const activeElementRef = useRef(null);
     const [activeElementRefresh, setActiveElementRefresh] = useState(false);
+    const activeElementRef = useRef(null);
+
     const user_id = "dbb4df83-03d2-4418-a662-39ebb9a24a5d";
     const name = "FishSlayer27";
 
-    function setActiveElementRef(element) {
+    function setActiveElementRef(e, element) {
+        e.preventDefault();
         activeElementRef.current = element;
     }
 
@@ -69,7 +69,7 @@ export default function Editor() {
                 const response = await axios.get(
                     "http://localhost:4000/api/getSite/a64a33ab-a1b0-41e8-a5ab-4eb35635fe93"
                 );
-
+                console.log(response.data.rows[0].content);
                 setEditableElements(response.data.rows[0].content.elements);
                 setEditableStyles(response.data.rows[0].content.styles);
             } catch (err) {
@@ -80,7 +80,6 @@ export default function Editor() {
     }, []);
 
     const styles = createStyles(editableStyles);
-
     return (
         <>
             <div
@@ -93,12 +92,16 @@ export default function Editor() {
                         setEditableElements
                     )
                 }
-                onClick={(e) => setActiveElementRef(e.target)}
+                onClick={(e) => setActiveElementRef(e, e.target)}
                 onMouseOver={handleHoverOver}
                 onMouseOut={handleHoverOut}
-                className="main-div"
+                className="main-div flex flex-row min-h-full"
             >
                 {styles}
+                <Sidebar
+                    activeElementRef={activeElementRef}
+                    editableStyles={editableStyles}
+                />
                 <div
                     className="editor-container"
                     onClick={() => setActiveElementRefresh((prev) => !prev)}
@@ -106,7 +109,6 @@ export default function Editor() {
                     <RenderChildren elements={editableElements} />
                 </div>
             </div>
-            <Sidebar activeElementRef={activeElementRef} />
         </>
     );
 }

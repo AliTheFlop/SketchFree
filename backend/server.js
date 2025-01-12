@@ -40,6 +40,20 @@ app.post("/api/createSite", async (req, res) => {
     }
 });
 
+app.put("/api/saveSite/:id", async (req, res) => {
+    const { user_id, content } = req.body;
+    const id = req.params;
+    try {
+        const response = await pool.query({
+            text: "UPDATE websites SET content = $1 WHERE id = $2 AND user_id = $3 ",
+            values: [JSON.stringify(content), id, user_id],
+        });
+        res.status(200).json(response);
+    } catch (err) {
+        throw err;
+    }
+});
+
 app.listen(PORT, () => {
     console.log("Server running on port ", PORT);
 });
