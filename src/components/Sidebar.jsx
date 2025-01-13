@@ -9,17 +9,17 @@ className="fixed left-0 top-[20%] p-3 h-4/6
 
 */
 
-export default function Sidebar({ activeElementRef }) {
+export default function Sidebar({ editableStyles }) {
     return (
         <>
             <div
-                className="p-3 overflow-auto h-[100vh] w-[250px]
-    bg-blue-950 backdrop-blur-sm shadow-lg border 
-     hover:delay-0 delay-500 transition-transform duration-300 flex flex-col"
+                className="p-3 overflow-auto h-[100vh] w-1/6
+    bg-white border-r-stone-300 backdrop-blur-sm shadow-lg border 
+     hover:delay-0 delay-500 transition-transform duration-300 flex flex-col pt-28"
             >
-                <div className="flex flex-col gap-3 mb-16">
+                <div className="grid grid-cols-2 gap-3 mb-16">
                     <button
-                        className="p-2 rounded-md text-[16px] border text-white hover:bg-gray-100 hover:text-blue-950
+                        className="p-1.5 rounded-md text-[16px] border text-white bg-stone-900 hover:bg-gray-100 hover:text-stone-900 hover:border-stone-900
         transition-all duration-200"
                         draggable
                         onDragStart={(e) => onDrag(e, "h1")}
@@ -27,7 +27,7 @@ export default function Sidebar({ activeElementRef }) {
                         Heading
                     </button>
                     <button
-                        className="p-2 rounded-md text-[16px] border text-white hover:bg-gray-100 hover:text-blue-950
+                        className="p-1.5 rounded-md text-[16px] border text-white bg-stone-900 hover:bg-gray-100 hover:text-stone-900 hover:border-stone-900
         transition-all duration-200"
                         draggable
                         onDragStart={(e) => onDrag(e, "p")}
@@ -35,7 +35,7 @@ export default function Sidebar({ activeElementRef }) {
                         Paragraph
                     </button>
                     <button
-                        className="p-2 rounded-md text-[16px] border text-white hover:bg-gray-100 hover:text-blue-950
+                        className="p-1.5 rounded-md text-[16px] border text-white bg-stone-900 hover:bg-gray-100 hover:text-stone-900 hover:border-stone-900
         transition-all duration-200"
                         draggable
                         onDragStart={(e) => onDrag(e, "div")}
@@ -43,7 +43,7 @@ export default function Sidebar({ activeElementRef }) {
                         Container
                     </button>
                     <button
-                        className="p-2 rounded-md text-[16px] border text-white hover:bg-gray-100 hover:text-blue-950
+                        className="p-1.5 rounded-md text-[16px] border text-white bg-stone-900 hover:bg-gray-100 hover:text-stone-900 hover:border-stone-900
         transition-all duration-200"
                         draggable
                         onDragStart={(e) => onDrag(e, "button")}
@@ -51,7 +51,7 @@ export default function Sidebar({ activeElementRef }) {
                         Button
                     </button>
                 </div>
-                <Stylebar element={activeElementRef.current} />
+                <Stylebar />
             </div>
         </>
     );

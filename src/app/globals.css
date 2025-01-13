@@ -21,19 +21,19 @@ body {
 }
 
 .dragover-top {
-    -webkit-box-shadow: inset 0px 8px 0px -6px rgba(32, 17, 242, 1);
-    -moz-box-shadow: inset 0px 8px 0px -6px rgba(32, 17, 242, 1);
-    box-shadow: inset 0px 8px 0px -6px rgba(32, 17, 242, 1);
+    -webkit-box-shadow: inset 0px 8px 0px -6px rgba(32, 17, 242, 1) !important;
+    -moz-box-shadow: inset 0px 8px 0px -6px rgba(32, 17, 242, 1) !important;
+    box-shadow: inset 0px 8px 0px -6px rgba(32, 17, 242, 1) !important;
 }
 
 .dragover-bottom {
-    -webkit-box-shadow: inset 0px -8px 0px -6px rgba(32, 17, 242, 1);
-    -moz-box-shadow: inset 0px -8px 0px -6px rgba(32, 17, 242, 1);
-    box-shadow: inset 0px -8px 0px -6px rgba(32, 17, 242, 1);
+    -webkit-box-shadow: inset 0px -8px 0px -6px rgba(32, 17, 242, 1) !important;
+    -moz-box-shadow: inset 0px -8px 0px -6px rgba(32, 17, 242, 1) !important;
+    box-shadow: inset 0px -8px 0px -6px rgba(32, 17, 242, 1) !important;
 }
 
 .hoverover {
-    -webkit-box-shadow: 0px 0px 2px 1px rgba(25, 141, 230, 1);
-    -moz-box-shadow: 0px 0px 2px 1px rgba(25, 141, 230, 1);
-    box-shadow: 0px 0px 2px 1px rgba(25, 141, 230, 1);
+    -webkit-box-shadow: inset 0px 0px 2px 1px rgba(25, 141, 230, 1) !important;
+    -moz-box-shadow: inset 0px 0px 2px 1px rgba(25, 141, 230, 1) !important;
+    box-shadow: inset 0px 0px 2px 1px rgba(25, 141, 230, 1) !important;
 }

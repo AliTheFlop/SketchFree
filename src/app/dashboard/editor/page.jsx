@@ -1,14 +1,15 @@
 "use client";
 import RenderChildren from "@/components/RenderChildren";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import axios from "axios";
 import {
     handleHoverOutOfElement,
-    handleOnDropElement,
     handleHoverOverElement,
 } from "@/lib/dragEvents";
+import handleOnDropElement from "@/lib/componentEvents";
 import Sidebar from "@/components/Sidebar";
 import { useStore } from "@/state/store";
+import { createStyles } from "@/lib/createStyles";
 
 async function saveData(user_id, name, content) {
     try {
@@ -20,26 +21,6 @@ async function saveData(user_id, name, content) {
     } catch (err) {
         throw err;
     }
-}
-
-function createStyles(editableStyles) {
-    let cssString = "";
-
-    editableStyles.forEach((styleClass) => {
-        let classCss = Object.entries(styleClass.styles)
-            .map(([key, value]) => {
-                return `    ${key}: ${value};`;
-            })
-            .join("\n");
-
-        cssString += `.${styleClass.class} {\n${classCss}\n}\n`;
-    });
-
-    return (
-        <style jsx global>{`
-            ${cssString.trim()}
-        `}</style>
-    );
 }
 
 function handleHoverOver(e) {
@@ -54,7 +35,7 @@ export default function Editor() {
     const editableElements = useStore((state) => state.editableElements);
     const editableStyles = useStore((state) => state.editableStyles);
     const insertElement = useStore((state) => state.insertElement);
-    const [activeElementRefresh, setActiveElementRefresh] = useState(false);
+    const setActiveElement = useStore((state) => state.setActiveElement);
     const activeElementRef = useRef(null);
 
     const user_id = "dbb4df83-03d2-4418-a662-39ebb9a24a5d";
@@ -63,6 +44,7 @@ export default function Editor() {
     function setActiveElementRef(e, element) {
         e.preventDefault();
         activeElementRef.current = element;
+        setActiveElement(element);
     }
 
     useEffect(() => {
@@ -89,26 +71,26 @@ export default function Editor() {
     const styles = createStyles(editableStyles);
     return (
         <div className="flex flex-row w-full">
-            <Sidebar
-                activeElementRef={activeElementRef}
-                editableStyles={editableStyles}
-            />
+            <Sidebar editableStyles={editableStyles} />
             <div
+                // Drag over any element adds border
                 onDragOver={handleHoverOverElement}
+                // Drag away from an element removes border
                 onDragLeave={handleHoverOutOfElement}
+                // Drop item onto page, updates elements aswell
                 onDrop={(e) =>
                     handleOnDropElement(e, editableElements, insertElement)
                 }
+                // On click set element as active (updates stylebar)
                 onClick={(e) => setActiveElementRef(e, e.target)}
+                // Handles border on hover (for helpful selections)
                 onMouseOver={handleHoverOver}
                 onMouseOut={handleHoverOut}
+                //Styles
                 className="main-div flex flex-row min-h-full w-full h-[100vh] overflow-auto"
             >
                 {styles}
-                <div
-                    className="editor-container w-full"
-                    onClick={() => setActiveElementRefresh((prev) => !prev)}
-                >
+                <div className="editor-container w-full">
                     <RenderChildren elements={editableElements} />
                 </div>
             </div>
