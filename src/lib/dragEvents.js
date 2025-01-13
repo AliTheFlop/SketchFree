@@ -1,5 +1,6 @@
 import getElement from "./getElement";
 import findItemRecursive from "./recursiveItem";
+import { useStore } from "@/state/store.js";
 
 function onDrag(e, type) {
     const elementData = getElement(type, makeid(7));
@@ -49,7 +50,7 @@ function handleHoverOutOfElement(e) {
     div.classList.remove("dragover-bottom");
 }
 
-function handleOnDropElement(e, editableElements, setEditableElements) {
+function handleOnDropElement(e, editableElements, insertElement) {
     e.preventDefault();
 
     const div = e.target;
@@ -71,41 +72,9 @@ function handleOnDropElement(e, editableElements, setEditableElements) {
     const y = e.clientY - rect.top; // Mouse on Y of rect
     const height = (100 * y) / rect.height; // Mouse Y coords on Rect
 
-    function updateNestedElements(elements, targetId, insertBefore) {
-        return elements
-            .map((element) => {
-                // If this is the target element
-                if (element.id === targetId) {
-                    return insertBefore ? [data, element] : [element, data];
-                }
+    const insertBefore = height <= 50;
 
-                // If this element has children, recursively search them
-                if (element.children && element.children.length > 0) {
-                    return {
-                        ...element,
-                        children: updateNestedElements(
-                            element.children,
-                            targetId,
-                            insertBefore
-                        ),
-                    };
-                }
-
-                return element;
-            })
-            .flat();
-    }
-
-    setEditableElements((prev) => {
-        // If dropping above element (height <= 50)
-        if (height <= 50) {
-            return updateNestedElements(prev, findItem.id, true);
-        }
-        // If dropping below element (height > 50)
-        else {
-            return updateNestedElements(prev, findItem.id, false);
-        }
-    });
+    insertElement(findItem.id, data, insertBefore);
 
     handleHoverOutOfElement(e);
 }

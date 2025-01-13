@@ -46,6 +46,7 @@ export default function ElementStyles({ element }) {
     return (
         <form onSubmit={(e) => saveData(e)}>
             {!isContainer(element.tagName) ? (
+                // Used to get inputs for that type of element.
                 <GetInputs element={element} key={elementKey} />
             ) : null}
         </form>

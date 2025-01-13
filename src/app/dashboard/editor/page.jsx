@@ -8,6 +8,7 @@ import {
     handleHoverOverElement,
 } from "@/lib/dragEvents";
 import Sidebar from "@/components/Sidebar";
+import { useStore } from "@/state/store";
 
 async function saveData(user_id, name, content) {
     try {
@@ -50,8 +51,9 @@ function handleHoverOut(e) {
 }
 
 export default function Editor() {
-    const [editableElements, setEditableElements] = useState([]);
-    const [editableStyles, setEditableStyles] = useState([]);
+    const editableElements = useStore((state) => state.editableElements);
+    const editableStyles = useStore((state) => state.editableStyles);
+    const insertElement = useStore((state) => state.insertElement);
     const [activeElementRefresh, setActiveElementRefresh] = useState(false);
     const activeElementRef = useRef(null);
 
@@ -69,9 +71,14 @@ export default function Editor() {
                 const response = await axios.get(
                     "http://localhost:4000/api/getSite/a64a33ab-a1b0-41e8-a5ab-4eb35635fe93"
                 );
-                console.log(response.data.rows[0].content);
-                setEditableElements(response.data.rows[0].content.elements);
-                setEditableStyles(response.data.rows[0].content.styles);
+                useStore
+                    .getState()
+                    .setEditableElements(
+                        response.data.rows[0].content.elements
+                    );
+                useStore
+                    .getState()
+                    .setEditableStyles(response.data.rows[0].content.styles);
             } catch (err) {
                 throw err;
             }
@@ -81,34 +88,30 @@ export default function Editor() {
 
     const styles = createStyles(editableStyles);
     return (
-        <>
+        <div className="flex flex-row w-full">
+            <Sidebar
+                activeElementRef={activeElementRef}
+                editableStyles={editableStyles}
+            />
             <div
                 onDragOver={handleHoverOverElement}
                 onDragLeave={handleHoverOutOfElement}
                 onDrop={(e) =>
-                    handleOnDropElement(
-                        e,
-                        editableElements,
-                        setEditableElements
-                    )
+                    handleOnDropElement(e, editableElements, insertElement)
                 }
                 onClick={(e) => setActiveElementRef(e, e.target)}
                 onMouseOver={handleHoverOver}
                 onMouseOut={handleHoverOut}
-                className="main-div flex flex-row min-h-full"
+                className="main-div flex flex-row min-h-full w-full h-[100vh] overflow-auto"
             >
                 {styles}
-                <Sidebar
-                    activeElementRef={activeElementRef}
-                    editableStyles={editableStyles}
-                />
                 <div
-                    className="editor-container"
+                    className="editor-container w-full"
                     onClick={() => setActiveElementRefresh((prev) => !prev)}
                 >
                     <RenderChildren elements={editableElements} />
                 </div>
             </div>
-        </>
+        </div>
     );
 }
