@@ -1,6 +1,30 @@
 import { onDrag } from "@/lib/dragEvents";
 import Stylebar from "./Stylebar";
 
+import {
+    Layout,
+    ChevronDown,
+    Layers,
+    Box,
+    Type,
+    Image,
+    Settings,
+    Play,
+    Save,
+    Plus,
+    Monitor,
+    Tablet,
+    Smartphone,
+    Bold,
+    Italic,
+    Link,
+    AlignLeft,
+    AlignCenter,
+    AlignRight,
+    Palette,
+    Copy,
+} from "lucide-react";
+
 /* 
 
 className="fixed left-0 top-[20%] p-3 h-4/6
@@ -17,39 +41,25 @@ export default function Sidebar({ editableStyles }) {
     bg-white border-r-stone-300 backdrop-blur-sm shadow-lg border 
      hover:delay-0 delay-500 transition-transform duration-300 flex flex-col pt-28"
             >
-                <div className="grid grid-cols-2 gap-3 mb-16">
-                    <button
-                        className="p-1.5 rounded-md text-[16px] border text-white bg-stone-900 hover:bg-gray-100 hover:text-stone-900 hover:border-stone-900
-        transition-all duration-200"
+                <div className="flex flex-col text-lg gap-3 mb-16 border-b p-4 border-gray-200 pb-10">
+                    <h3 className="text-sm mb-4">Elements</h3>
+                    <div
                         draggable
                         onDragStart={(e) => onDrag(e, "h1")}
+                        className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded cursor-pointer"
                     >
-                        Heading
-                    </button>
-                    <button
-                        className="p-1.5 rounded-md text-[16px] border text-white bg-stone-900 hover:bg-gray-100 hover:text-stone-900 hover:border-stone-900
-        transition-all duration-200"
-                        draggable
-                        onDragStart={(e) => onDrag(e, "p")}
-                    >
-                        Paragraph
-                    </button>
-                    <button
-                        className="p-1.5 rounded-md text-[16px] border text-white bg-stone-900 hover:bg-gray-100 hover:text-stone-900 hover:border-stone-900
-        transition-all duration-200"
+                        <Type size={18} />
+                        <button>Text</button>
+                    </div>
+
+                    <div
                         draggable
                         onDragStart={(e) => onDrag(e, "div")}
+                        className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded cursor-pointer"
                     >
-                        Container
-                    </button>
-                    <button
-                        className="p-1.5 rounded-md text-[16px] border text-white bg-stone-900 hover:bg-gray-100 hover:text-stone-900 hover:border-stone-900
-        transition-all duration-200"
-                        draggable
-                        onDragStart={(e) => onDrag(e, "button")}
-                    >
-                        Button
-                    </button>
+                        <Box size={18} />
+                        <button>Container</button>
+                    </div>
                 </div>
                 <Stylebar />
             </div>
