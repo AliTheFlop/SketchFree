@@ -11,6 +11,15 @@ import Sidebar from "@/components/Sidebar";
 import { useStore } from "@/state/store";
 import { createStyles } from "@/lib/createStyles";
 
+/**
+ * Can access DB @ 192.168.4.132:5432
+ * Host: postgres
+ * DB: Sketchfree
+ * PW: PGPASS in .env
+ *
+ * Postgres init file @ /backend/db.js
+ */
+
 async function saveData(user_id, name, content) {
     try {
         await axios.post("http://localhost:4000/api/createSite", {
@@ -37,6 +46,7 @@ export default function Editor() {
     const insertElement = useStore((state) => state.insertElement);
     const setActiveElement = useStore((state) => state.setActiveElement);
 
+    // Saved for later dont delete
     const user_id = "dbb4df83-03d2-4418-a662-39ebb9a24a5d";
     const name = "FishSlayer27";
 

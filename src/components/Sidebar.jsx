@@ -11,7 +11,7 @@ className="fixed left-0 top-[20%] p-3 h-4/6
 
 */
 
-export default function Sidebar({ editableStyles }) {
+export default function Sidebar() {
     return (
         <>
             <div

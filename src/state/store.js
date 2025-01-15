@@ -26,6 +26,7 @@ export const useStore = create((set) => ({
     deleteElement: (targetId) =>
         set((state) => ({
             editableElements: deleteElement(state.editableElements, targetId),
+            activeElement: null,
         })),
     // Setter for elements
     setEditableElements: (elements) =>
