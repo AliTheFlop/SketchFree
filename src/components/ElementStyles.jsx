@@ -14,7 +14,7 @@ function handleSelectChange(e, element) {
     element.style.flexDirection = e.target.value;
 }
 
-function isContainer(tag) {
+export function isContainer(tag) {
     const containers = [
         "DIV",
         "div",
@@ -67,21 +67,13 @@ function GetInputs({ element }) {
 
 export default function ElementStyles({ element }) {
     const elementKey = element?.id || "no-element";
-    const deleteElement = useStore((state) => state.deleteElement); // Requires targetId
+
     return (
         <form onSubmit={(e) => saveData(e)} className="flex h-full flex-col">
             {isContainer(element.tagName) ? (
                 // Used to get inputs for that type of element.
                 <GetInputs element={element} key={elementKey} />
             ) : null}
-
-            <button
-                onClick={() => deleteElement(element.id)}
-                className="p-1.5 rounded-md text-[16px] border text-white bg-stone-900 hover:bg-gray-100 hover:text-stone-900 hover:border-stone-900
-        transition-all duration-200 self-end mt-10"
-            >
-                Delete Element
-            </button>
         </form>
     );
 }

@@ -1,443 +1,231 @@
-let page = [
-    {
-        id: "nav_wrapper",
-        type: "nav",
-        content: null,
-        props: {
-            style: {
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "20px 40px",
-                alignItems: "center",
-                position: "fixed",
+let page = {
+    styles: [
+        {
+            id: "a8b3f2",
+            class: "a8b3f2",
+            styles: {
                 width: "100%",
-                backgroundColor: "white",
-                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-            },
-            id: "nav_wrapper",
-        },
-        children: [
-            {
-                id: "logo",
-                type: "h1",
-                content: "SketchFree",
-                props: {
-                    style: {
-                        fontSize: "24px",
-                        fontWeight: "bold",
-                        color: "#333",
-                    },
-                },
-            },
-            {
-                id: "nav_links",
-                type: "div",
-                content: null,
-                props: {
-                    style: {
-                        display: "flex",
-                        gap: "24px",
-                        alignItems: "center",
-                    },
-                },
-                children: [
-                    {
-                        id: "link_1",
-                        type: "a",
-                        content: "Features",
-                        props: {
-                            href: "#features",
-                            style: {
-                                textDecoration: "none",
-                                color: "#333",
-                            },
-                        },
-                    },
-                    {
-                        id: "link_2",
-                        type: "a",
-                        content: "Pricing",
-                        props: {
-                            href: "#pricing",
-                            style: {
-                                textDecoration: "none",
-                                color: "#333",
-                            },
-                        },
-                    },
-                    {
-                        id: "cta_button",
-                        type: "button",
-                        content: "Get Started",
-                        props: {
-                            style: {
-                                backgroundColor: "#007AFF",
-                                color: "white",
-                                padding: "10px 20px",
-                                border: "none",
-                                borderRadius: "6px",
-                                cursor: "pointer",
-                            },
-                            id: "link_3",
-                        },
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        id: "hero_section",
-        type: "div",
-        content: null,
-        props: {
-            style: {
-                minHeight: "100vh",
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                padding: "20px 40px",
+                "box-shadow": "0 2px 4px rgba(0,0,0,0.1)",
+                "align-items": "center",
+                "justify-content": "space-between",
+                "background-color": "#004080",
+            },
+        },
+        {
+            id: "f9p6xq",
+            class: "f9p6xq",
+            styles: {
+                color: "white",
+                "font-size": "24px",
+                "font-weight": "bold",
+            },
+        },
+        {
+            id: "q3w4l8",
+            class: "q3w4l8",
+            styles: {
+                gap: "24px",
+                display: "flex",
+                "align-items": "center",
+            },
+        },
+        {
+            id: "p2j7wq",
+            class: "p2j7wq",
+            styles: {
+                color: "white",
+                "text-decoration": "none",
+                "font-size": "16px",
+            },
+        },
+        {
+            id: "z6k2vw",
+            class: "z6k2vw",
+            styles: {
+                color: "white",
+                border: "2px solid white",
+                cursor: "pointer",
+                padding: "10px 20px",
+                "border-radius": "6px",
+                "background-color": "transparent",
+            },
+        },
+        {
+            id: "x9v4yt",
+            class: "x9v4yt",
+            styles: {
+                display: "flex",
                 padding: "0 40px",
-                backgroundColor: "#f8f9fa",
+                "min-height": "100vh",
+                "align-items": "center",
+                "justify-content": "center",
+                "background-color": "#e6f7ff",
             },
         },
-        children: [
-            {
-                id: "hero_content",
-                type: "div",
-                content: null,
-                props: {
-                    style: {
-                        maxWidth: "800px",
-                        textAlign: "center",
-                    },
-                },
-                children: [
-                    {
-                        id: "hero_title",
-                        type: "h1",
-                        content: "Build Something Amazing",
-                        props: {
-                            style: {
-                                fontSize: "48px",
-                                marginBottom: "24px",
-                                color: "#1a1a1a",
-                            },
-                        },
-                    },
-                    {
-                        id: "hero_subtitle",
-                        type: "p",
-                        content:
-                            "Create stunning websites without writing code. Start your journey today.",
-                        props: {
-                            style: {
-                                fontSize: "20px",
-                                color: "#666",
-                                marginBottom: "32px",
-                            },
-                        },
-                    },
-                    {
-                        id: "hero_button",
-                        type: "button",
-                        content: "Get Started",
-                        props: {
-                            style: {
-                                backgroundColor: "#007AFF",
-                                color: "white",
-                                padding: "10px 20px",
-                                border: "none",
-                                borderRadius: "6px",
-                                cursor: "pointer",
-                            },
-                        },
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        id: "features_section",
-        type: "section",
-        content: null,
-        props: {
-            style: {
-                padding: "80px 40px",
-                backgroundColor: "white",
+        {
+            id: "v5y8mz",
+            class: "v5y8mz",
+            styles: {
+                "max-width": "800px",
+                "text-align": "center",
             },
         },
-        children: [
-            {
-                id: "features_grid",
-                type: "div",
-                content: null,
-                props: {
-                    style: {
-                        display: "grid",
-                        gridTemplateColumns:
-                            "repeat(auto-fit, minmax(300px, 1fr))",
-                        gap: "32px",
-                        maxWidth: "1200px",
-                        margin: "0 auto",
-                    },
-                },
-                children: [
-                    {
-                        id: "feature_1",
-                        type: "div",
-                        content: null,
-                        props: {
-                            style: {
-                                padding: "24px",
-                                borderRadius: "12px",
-                                backgroundColor: "#f8f9fa",
-                            },
-                        },
-                        children: [
-                            {
-                                id: "feature_1_icon",
-                                type: "div",
-                                content: "🚀",
-                                props: {
-                                    style: {
-                                        fontSize: "32px",
-                                        marginBottom: "16px",
-                                    },
-                                },
-                            },
-                            {
-                                id: "feature_1_title",
-                                type: "h3",
-                                content: "Lightning Fast",
-                                props: {
-                                    style: {
-                                        fontSize: "24px",
-                                        marginBottom: "12px",
-                                    },
-                                },
-                            },
-                            {
-                                id: "feature_1_desc",
-                                type: "p",
-                                content:
-                                    "Build and deploy in minutes, not hours.",
-                                props: {
-                                    style: {
-                                        color: "#666",
-                                    },
-                                },
-                            },
-                        ],
-                    },
-                    {
-                        id: "feature_1",
-                        type: "div",
-                        content: null,
-                        props: {
-                            style: {
-                                padding: "24px",
-                                borderRadius: "12px",
-                                backgroundColor: "#f8f9fa",
-                            },
-                        },
-                        children: [
-                            {
-                                id: "feature_1_icon",
-                                type: "div",
-                                content: "🚀",
-                                props: {
-                                    style: {
-                                        fontSize: "32px",
-                                        marginBottom: "16px",
-                                    },
-                                },
-                            },
-                            {
-                                id: "feature_1_title",
-                                type: "h3",
-                                content: "Lightning Fast",
-                                props: {
-                                    style: {
-                                        fontSize: "24px",
-                                        marginBottom: "12px",
-                                    },
-                                },
-                            },
-                            {
-                                id: "feature_1_desc",
-                                type: "p",
-                                content:
-                                    "Build and deploy in minutes, not hours.",
-                                props: {
-                                    style: {
-                                        color: "#666",
-                                    },
-                                },
-                            },
-                        ],
-                    },
-                    {
-                        id: "feature_1",
-                        type: "div",
-                        content: null,
-                        props: {
-                            style: {
-                                padding: "24px",
-                                borderRadius: "12px",
-                                backgroundColor: "#f8f9fa",
-                            },
-                        },
-                        children: [
-                            {
-                                id: "feature_1_icon",
-                                type: "div",
-                                content: "🚀",
-                                props: {
-                                    style: {
-                                        fontSize: "32px",
-                                        marginBottom: "16px",
-                                    },
-                                },
-                            },
-                            {
-                                id: "feature_1_title",
-                                type: "h3",
-                                content: "Lightning Fast",
-                                props: {
-                                    style: {
-                                        fontSize: "24px",
-                                        marginBottom: "12px",
-                                    },
-                                },
-                            },
-                            {
-                                id: "feature_1_desc",
-                                type: "p",
-                                content:
-                                    "Build and deploy in minutes, not hours.",
-                                props: {
-                                    style: {
-                                        color: "#666",
-                                    },
-                                },
-                            },
-                        ],
-                    },
-                    // You can duplicate this feature block with different IDs and content
-                ],
-            },
-        ],
-    },
-    {
-        id: "testimonials",
-        type: "section",
-        content: null,
-        props: {
-            style: {
-                padding: "80px 40px",
-                backgroundColor: "#f8f9fa",
+        {
+            id: "b3l9kp",
+            class: "b3l9kp",
+            styles: {
+                color: "#003366",
+                "font-size": "48px",
+                "margin-bottom": "24px",
             },
         },
-        children: [
-            {
-                id: "testimonials_container",
-                type: "div",
-                content: null,
-                props: {
-                    style: {
-                        maxWidth: "1200px",
-                        margin: "0 auto",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "48px",
-                    },
-                },
-                children: [
-                    {
-                        id: "testimonial_1",
-                        type: "div",
-                        content: null,
-                        props: {
-                            style: {
-                                padding: "32px",
-                                backgroundColor: "white",
-                                borderRadius: "12px",
-                                boxShadow: "0 4px 6px rgba(0,0,0,0.05)",
-                            },
-                        },
-                        children: [
-                            {
-                                id: "quote",
-                                type: "p",
-                                content:
-                                    "This tool saved us countless hours of development time.",
-                                props: {
-                                    style: {
-                                        fontSize: "18px",
-                                        lineHeight: "1.6",
-                                        marginBottom: "24px",
-                                    },
-                                },
-                            },
-                            {
-                                id: "author_info",
-                                type: "div",
-                                content: null,
-                                props: {
-                                    style: {
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "12px",
-                                    },
-                                },
-                                children: [
-                                    {
-                                        id: "author_avatar",
-                                        type: "img",
-                                        content: null,
-                                        props: {
-                                            src: null,
-                                            style: {
-                                                borderRadius: "50%",
-                                            },
-                                        },
-                                    },
-                                    {
-                                        id: "author_details",
-                                        type: "div",
-                                        content: null,
-                                        children: [
-                                            {
-                                                id: "author_name",
-                                                type: "h4",
-                                                content: "Sarah Johnson",
-                                                props: {
-                                                    style: {
-                                                        fontSize: "16px",
-                                                        fontWeight: "bold",
-                                                    },
-                                                },
-                                            },
-                                            {
-                                                id: "author_role",
-                                                type: "p",
-                                                content: "CTO, TechStart",
-                                                props: {
-                                                    style: {
-                                                        fontSize: "14px",
-                                                        color: "#666",
-                                                    },
-                                                },
-                                            },
-                                        ],
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                ],
+        {
+            id: "g2w5nz",
+            class: "g2w5nz",
+            styles: {
+                color: "#666",
+                "font-size": "20px",
+                "margin-bottom": "32px",
             },
-        ],
-    },
-];
+        },
+        {
+            id: "k8q7tw",
+            class: "k8q7tw",
+            styles: {
+                color: "white",
+                border: "none",
+                cursor: "pointer",
+                padding: "12px 24px",
+                "border-radius": "6px",
+                "background-color": "#004080",
+            },
+        },
+    ],
+    elements: [
+        {
+            id: "a8b3f2",
+            type: "nav",
+            class: "a8b3f2",
+            props: {
+                id: "a8b3f2",
+                className: "a8b3f2",
+            },
+            content: null,
+            children: [
+                {
+                    id: "f9p6xq",
+                    type: "h1",
+                    class: "f9p6xq",
+                    props: {
+                        id: "f9p6xq",
+                        className: "f9p6xq",
+                    },
+                    content: "BlueWave Plumbing",
+                },
+                {
+                    id: "q3w4l8",
+                    type: "div",
+                    class: "q3w4l8",
+                    props: {
+                        id: "q3w4l8",
+                        className: "q3w4l8",
+                    },
+                    content: null,
+                    children: [
+                        {
+                            id: "p2j7wq",
+                            type: "a",
+                            class: "p2j7wq",
+                            props: {
+                                id: "p2j7wq",
+                                href: "#services",
+                                className: "p2j7wq",
+                            },
+                            content: "Services",
+                        },
+                        {
+                            id: "p2j7wq2",
+                            type: "a",
+                            class: "p2j7wq",
+                            props: {
+                                id: "p2j7wq2",
+                                href: "#about",
+                                className: "p2j7wq",
+                            },
+                            content: "About Us",
+                        },
+                        {
+                            id: "z6k2vw",
+                            type: "button",
+                            class: "z6k2vw",
+                            props: {
+                                id: "z6k2vw",
+                                className: "z6k2vw",
+                            },
+                            content: "Contact Us",
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            id: "x9v4yt",
+            type: "div",
+            class: "x9v4yt",
+            props: {
+                id: "x9v4yt",
+                className: "x9v4yt",
+            },
+            content: null,
+            children: [
+                {
+                    id: "v5y8mz",
+                    type: "div",
+                    class: "v5y8mz",
+                    props: {
+                        id: "v5y8mz",
+                        className: "v5y8mz",
+                    },
+                    content: null,
+                    children: [
+                        {
+                            id: "b3l9kp",
+                            type: "h1",
+                            class: "b3l9kp",
+                            props: {
+                                id: "b3l9kp",
+                                className: "b3l9kp",
+                            },
+                            content: "Reliable Plumbing Services",
+                        },
+                        {
+                            id: "g2w5nz",
+                            type: "p",
+                            class: "g2w5nz",
+                            props: {
+                                id: "g2w5nz",
+                                className: "g2w5nz",
+                            },
+                            content:
+                                "From leaky faucets to major repairs, trust BlueWave Plumbing to get the job done quickly and efficiently.",
+                        },
+                        {
+                            id: "k8q7tw",
+                            type: "button",
+                            class: "k8q7tw",
+                            props: {
+                                id: "k8q7tw",
+                                className: "k8q7tw",
+                            },
+                            content: "Book a Service",
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+};
 
 module.exports = page;

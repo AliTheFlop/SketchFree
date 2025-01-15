@@ -1,29 +1,7 @@
 import { onDrag } from "@/lib/dragEvents";
 import Stylebar from "./Stylebar";
 
-import {
-    Layout,
-    ChevronDown,
-    Layers,
-    Box,
-    Type,
-    Image,
-    Settings,
-    Play,
-    Save,
-    Plus,
-    Monitor,
-    Tablet,
-    Smartphone,
-    Bold,
-    Italic,
-    Link,
-    AlignLeft,
-    AlignCenter,
-    AlignRight,
-    Palette,
-    Copy,
-} from "lucide-react";
+import { Box, Type } from "lucide-react";
 
 /* 
 

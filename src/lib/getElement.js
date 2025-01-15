@@ -43,6 +43,7 @@ function getElement(type, id) {
 
                     id: id,
                 },
+                children: [],
                 content: null,
             };
         case "button":

@@ -1,6 +1,6 @@
 "use client";
 import RenderChildren from "@/components/RenderChildren";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import {
     handleHoverOutOfElement,
@@ -36,14 +36,12 @@ export default function Editor() {
     const editableStyles = useStore((state) => state.editableStyles);
     const insertElement = useStore((state) => state.insertElement);
     const setActiveElement = useStore((state) => state.setActiveElement);
-    const activeElementRef = useRef(null);
 
     const user_id = "dbb4df83-03d2-4418-a662-39ebb9a24a5d";
     const name = "FishSlayer27";
 
     function setActiveElementRef(e, element) {
         e.preventDefault();
-        activeElementRef.current = element;
         setActiveElement(element);
     }
 

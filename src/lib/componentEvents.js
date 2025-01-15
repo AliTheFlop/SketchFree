@@ -1,5 +1,6 @@
 import { handleHoverOutOfElement } from "./dragEvents";
 import findItemRecursive from "./recursiveItem";
+import { isContainer } from "@/components/ElementStyles";
 
 // Add component
 function handleOnDropElement(e, editableElements, insertElement) {
@@ -26,7 +27,20 @@ function handleOnDropElement(e, editableElements, insertElement) {
 
     const insertBefore = height <= 50;
 
-    insertElement(findItem.id, data, insertBefore);
+    if (isContainer(div.tagName)) {
+        const insertInsideAbove = height <= 50 && height >= 15;
+        const insertInsideBelow = height >= 51 && height <= 85;
+
+        insertElement(
+            findItem.id,
+            data,
+            insertBefore,
+            insertInsideAbove,
+            insertInsideBelow
+        );
+    } else {
+        insertElement(findItem.id, data, insertBefore, false, false);
+    }
 
     handleHoverOutOfElement(e);
 }
