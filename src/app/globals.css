@@ -36,3 +36,9 @@ body {
     -moz-box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 1) !important;
     box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 1) !important;
 }
+
+.selected {
+    -webkit-box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 1) !important;
+    -moz-box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 1) !important;
+    box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 1) !important;
+}

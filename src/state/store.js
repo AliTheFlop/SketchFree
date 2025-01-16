@@ -39,8 +39,11 @@ export const useStore = create((set) => ({
             editableStyles: styles,
         })),
     setActiveElement: (newElement) =>
-        set(() => ({
-            activeElement: newElement,
+        set((state) => ({
+            activeElement: handleActiveElementChange(
+                state.activeElement,
+                newElement
+            ),
         })),
 }));
 
@@ -138,4 +141,14 @@ function deleteElement(elements, targetId) {
             }
             return element;
         });
+}
+
+function handleActiveElementChange(element, newElement) {
+    if (!element) {
+        newElement.classList.add("selected");
+        return newElement;
+    }
+    element.classList.remove("selected");
+    newElement.classList.add("selected");
+    return newElement;
 }

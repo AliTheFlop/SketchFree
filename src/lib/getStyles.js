@@ -1,19 +1,14 @@
 import { isContainer } from "@/components/ElementStyles";
+import Style from "@/components/Style";
 
 // Handles inner text changes
 function updateElementText(e, element) {
     element.innerText = e.target.value ? e.target.value : e.target.placeholder;
 }
 
-// Handles changes for selects
-function handleSelectChange(e, element, type) {
-    element.style[type] = e.target.value;
-}
-
 /**
- * Selects are for: flexDirection (tba)
- * ElementText is for: text (tba)
- * TBA
+ * Most things can be handleStyleChange (if style and value)
+ * Text is updateElementText
  */
 
 // Returns styles based on the type of tag
@@ -21,48 +16,81 @@ export default function GetStyles({ tag, element }) {
     if (isContainer(tag)) {
         return (
             <div className="flex flex-col">
-                <div className="mb-10">
-                    <p className="font-bold text-sm">Inner Text</p>
-                    <input
-                        type="text"
-                        defaultValue={element.innerHTML}
-                        onChange={(e) => updateElementText(e, element)}
-                        className="border p-1"
+                <div className="grid grid-cols-2 gap-2">
+                    {/** Flex Direction */}
+                    <Style
+                        tag="select"
+                        name="Flex Direction"
+                        element={element}
+                        type="flexDirection"
+                        measurement=""
+                        options={[
+                            { name: "Row", value: "row" },
+                            { name: "Column", value: "column" },
+                        ]}
+                    />
+
+                    {/** Justify Content */}
+                    <Style
+                        tag="select"
+                        name="Justify Content"
+                        element={element}
+                        type="justifyContent"
+                        measurement=""
+                        options={[
+                            { name: "Center", value: "center" },
+                            { name: "Start", value: "start" },
+                            { name: "End", value: "end" },
+                            { name: "Space Between", value: "space-between" },
+                            { name: "Space Around", value: "space-around" },
+                            { name: "Space Evenly", value: "space-evenly" },
+                        ]}
+                    />
+                    {/** Align Items */}
+                    <Style
+                        tag="select"
+                        name="Align Items"
+                        element={element}
+                        type="alignItems"
+                        measurement=""
+                        options={[
+                            { name: "Center", value: "center" },
+                            { name: "Start", value: "start" },
+                            { name: "End", value: "end" },
+                        ]}
+                    />
+                    {/** Border Width */}
+                    <Style
+                        tag="input"
+                        name="Border Width"
+                        element={element}
+                        type="borderWidth"
+                        measurement="px"
+                        options={null}
+                    />
+
+                    {/** Border Radius */}
+                    <Style
+                        tag="input"
+                        name="Border Radius"
+                        element={element}
+                        type="borderRadius"
+                        measurement="px"
+                        options={null}
                     />
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                    <div>
-                        <label className="font-bold text-sm">
-                            Flex Direction
-                        </label>
-                        <select
-                            name="flex-direction"
-                            className="border p-1"
-                            onChange={(e) =>
-                                handleSelectChange(e, element, "flexDirection")
-                            }
-                        >
-                            <option value="column">Column</option>
-                            <option value="row">Row</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                    <div>
-                        <label className="font-bold text-sm">
-                            Flex Direction
-                        </label>
-                        <select
-                            name="flex-direction"
-                            className="border p-1"
-                            onChange={(e) => handleSelectChange(e, element)}
-                        >
-                            <option value="column">Column</option>
-                            <option value="row">Row</option>
-                        </select>
-                    </div>
-                </div>
+            </div>
+        );
+    } else {
+        return (
+            <div className="mb-10">
+                <p className="font-bold text-sm">Inner Text</p>
+                <input
+                    type="text"
+                    defaultValue={element.innerHTML}
+                    onChange={(e) => updateElementText(e, element)}
+                    className="border p-1"
+                />
             </div>
         );
     }

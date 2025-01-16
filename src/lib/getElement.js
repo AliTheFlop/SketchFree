@@ -3,6 +3,7 @@ function getElement(type, id) {
         case "h1":
             return {
                 id: id,
+                class: id,
                 type: "h1",
                 props: {
                     style: {
@@ -10,7 +11,7 @@ function getElement(type, id) {
                         fontSize: "24px",
                         fontWeight: "bold",
                     },
-
+                    className: id,
                     id: id,
                 },
                 content: "SketchFree",
@@ -18,13 +19,14 @@ function getElement(type, id) {
         case "p":
             return {
                 id: id,
+                class: id,
                 type: "p",
                 props: {
                     style: {
                         color: "#333",
                         fontSize: "16px",
                     },
-
+                    className: id,
                     id: id,
                 },
                 content: "Edit Me!",
@@ -32,6 +34,7 @@ function getElement(type, id) {
         case "div":
             return {
                 id: id,
+                class: id,
                 type: "div",
                 props: {
                     style: {
@@ -40,7 +43,7 @@ function getElement(type, id) {
                         width: "200px",
                         height: "200px",
                     },
-
+                    className: id,
                     id: id,
                 },
                 children: [],
@@ -49,6 +52,7 @@ function getElement(type, id) {
         case "button":
             return {
                 id: id,
+                class: id,
                 type: "button",
                 props: {
                     style: {
@@ -59,7 +63,7 @@ function getElement(type, id) {
                         borderRadius: "6px",
                         backgroundColor: "rgb(0, 122, 255)",
                     },
-
+                    className: id,
                     id: id,
                 },
                 content: "Edit Me!",
