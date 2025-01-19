@@ -1,7 +1,7 @@
 import { onDrag } from "@/lib/dragEvents";
 import Stylebar from "./Stylebar";
-
 import { Box, Type } from "lucide-react";
+import { useStore } from "@/state/store";
 
 /* 
 
@@ -23,7 +23,7 @@ export default function Sidebar() {
                     <h3 className="text-sm mb-4">Elements</h3>
                     <div
                         draggable
-                        onDragStart={(e) => onDrag(e, "h1")}
+                        onDragStart={(e) => onDrag(e, "h1", null)}
                         className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded cursor-pointer"
                     >
                         <Type size={18} />
@@ -32,7 +32,7 @@ export default function Sidebar() {
 
                     <div
                         draggable
-                        onDragStart={(e) => onDrag(e, "div")}
+                        onDragStart={(e) => onDrag(e, "div", null)}
                         className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded cursor-pointer"
                     >
                         <Box size={18} />

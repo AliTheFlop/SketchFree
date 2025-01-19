@@ -1,25 +1,10 @@
 import getElement from "./getElement";
-import findItemRecursive from "./recursiveItem";
-import { useStore } from "@/state/store.js";
+import makeid from "./makeid";
 
-function onDrag(e, type) {
-    const elementData = getElement(type, makeid(7));
+// Set element to insert into dataTransfer when drag starts
+function onDrag(e, type, editableElements) {
+    const elementData = getElement(e, type, makeid(7), editableElements);
     e.dataTransfer.setData("element", JSON.stringify(elementData));
-}
-
-function makeid(length) {
-    let result = "";
-    const characters =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < length) {
-        result += characters.charAt(
-            Math.floor(Math.random() * charactersLength)
-        );
-        counter += 1;
-    }
-    return result;
 }
 
 function handleHoverOverElement(e) {
@@ -53,6 +38,6 @@ function handleHoverOutOfElement(e) {
 module.exports = {
     handleHoverOutOfElement,
     handleHoverOverElement,
-
     onDrag,
+    makeid,
 };

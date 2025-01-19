@@ -14,8 +14,10 @@ function handleOnDropElement(e, editableElements, insertElement) {
         return;
     }
 
+    // Get data to insert after dropping
     const data = JSON.parse(e.dataTransfer.getData("element"));
 
+    // Find item to drop before / after
     const findItem = findItemRecursive(editableElements, div.id);
 
     // Find Height Of Mouse To Drop Item

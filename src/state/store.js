@@ -72,7 +72,6 @@ function updateNestedElements(
                     }
                     element.children.push(newElement);
                 }
-
                 return element;
 
                 /**
@@ -95,7 +94,6 @@ function updateNestedElements(
                     ),
                 };
             }
-
             return element;
         });
     } else {
