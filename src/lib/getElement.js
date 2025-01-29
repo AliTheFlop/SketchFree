@@ -1,5 +1,9 @@
 import makeid from "./makeid";
+import findItemRecursive from "./recursiveItem";
 
+/* 
+
+// Find an element in the editableElements array
 function handleFindElement(target, editableElements) {
     let elementFound = null;
 
@@ -15,19 +19,21 @@ function handleFindElement(target, editableElements) {
         }
     }
 
-    if (!elementFound) console.log("No element has been found");
     return elementFound;
 }
 
-function getElement(e, type, id, editableElements) {
-    if (!type) {
-        const newElement = handleFindElement(e.target, editableElements);
-        const newId = makeid(7);
+*/
 
-        newElement.id = newId;
-        newElement.class = newId;
-        newElement.props.id = newId;
-        newElement.props.className = newId;
+// Get the element to be dragged
+function getElement(e, type, editableElements) {
+    const id = makeid(7);
+    if (!type) {
+        const newElement = findItemRecursive(editableElements, e.target.id);
+
+        newElement.id = id;
+        newElement.class = id;
+        newElement.props.id = id;
+        newElement.props.className = id;
 
         return newElement;
     }

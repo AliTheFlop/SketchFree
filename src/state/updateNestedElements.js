@@ -1,57 +1,4 @@
-import { create } from "zustand";
-
-export const useStore = create((set) => ({
-    editableElements: [], // Initial elements
-    editableStyles: [], // Initial styles
-    activeElement: null, // Initial Active Element
-
-    // Action to insert a new element
-    insertElement: (
-        targetId,
-        newElement,
-        insertBefore,
-        insertInsideAbove,
-        insertInsideBelow
-    ) =>
-        set((state) => ({
-            editableElements: updateNestedElements(
-                state.editableElements,
-                targetId,
-                newElement,
-                insertBefore,
-                insertInsideAbove,
-                insertInsideBelow
-            ),
-        })),
-    deleteElement: (targetId) =>
-        set((state) => ({
-            editableElements: deleteElement(state.editableElements, targetId),
-            activeElement: null,
-        })),
-    // Setter for elements
-    setEditableElements: (elements) =>
-        set(() => ({
-            editableElements: elements,
-        })),
-    // Setter for styles
-    setEditableStyles: (styles) =>
-        set(() => ({
-            editableStyles: styles,
-        })),
-    insertStyle: (style) =>
-        set((state) => ({
-            editableStyles: handleInsertStyle(state, style),
-        })),
-    setActiveElement: (newElement) =>
-        set((state) => ({
-            activeElement: handleActiveElementChange(
-                state.activeElement,
-                newElement
-            ),
-        })),
-}));
-
-function updateNestedElements(
+export default function updateNestedElements(
     elements,
     targetId,
     newElement,
@@ -128,33 +75,4 @@ function updateNestedElements(
             })
             .flat();
     }
-}
-
-function deleteElement(elements, targetId) {
-    return elements
-        .filter((element) => element.id !== targetId) // Remove the target element
-        .map((element) => {
-            // If this element has children, recursively search them
-            if (element.children && element.children.length > 0) {
-                return {
-                    ...element,
-                    children: deleteElement(element.children, targetId),
-                };
-            }
-            return element;
-        });
-}
-
-function handleActiveElementChange(element, newElement) {
-    if (!element) {
-        newElement.classList.add("selected");
-        return newElement;
-    }
-    element.classList.remove("selected");
-    newElement.classList.add("selected");
-    return newElement;
-}
-
-function handleInsertStyle(state, style) {
-    return state.editableStyles.push(style);
 }

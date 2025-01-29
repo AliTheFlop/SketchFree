@@ -57,6 +57,8 @@ export default function Editor() {
     const editableStyles = useStore((state) => state.editableStyles);
     const insertElement = useStore((state) => state.insertElement);
     const setActiveElement = useStore((state) => state.setActiveElement);
+    const deleteElement = useStore((state) => state.deleteElement);
+    const insertStyle = useStore((state) => state.insertStyle);
 
     // Saved for later dont delete
     const user_id = "dbb4df83-03d2-4418-a662-39ebb9a24a5d";
@@ -77,6 +79,7 @@ export default function Editor() {
                     // this link is just for now
                     "http://localhost:4000/api/getSite/a64a33ab-a1b0-41e8-a5ab-4eb35635fe93"
                 );
+
                 // Set elements / page
                 useStore
                     .getState()
@@ -116,9 +119,16 @@ export default function Editor() {
                 onDragLeave={handleHoverOutOfElement}
                 // On drag of any element
                 onDragStart={(e) => onDrag(e, null, editableElements)}
-                // Drop item onto page, updates elements aswell
+                // Drop item onto page, update elements, insertNewElement, deleteElement
                 onDrop={(e) =>
-                    handleOnDropElement(e, editableElements, insertElement)
+                    handleOnDropElement(
+                        e,
+                        editableElements,
+                        editableStyles,
+                        insertElement,
+                        insertStyle,
+                        deleteElement
+                    )
                 }
                 // On click set element as active (updates stylebar)
                 onClick={(e) => setActiveElementRef(e, e.target)}

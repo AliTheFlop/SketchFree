@@ -1,9 +1,17 @@
 import { handleHoverOutOfElement } from "./dragEvents";
 import findItemRecursive from "./recursiveItem";
 import { isContainer } from "@/components/ElementStyles";
+import getElementStyle from "./getElementStyles";
 
 // Add component
-function handleOnDropElement(e, editableElements, insertElement) {
+function handleOnDropElement(
+    e,
+    editableElements,
+    editableStyles,
+    insertElement,
+    insertStyle,
+    deleteElement
+) {
     e.preventDefault();
 
     const div = e.target;
@@ -16,6 +24,7 @@ function handleOnDropElement(e, editableElements, insertElement) {
 
     // Get data to insert after dropping
     const data = JSON.parse(e.dataTransfer.getData("element"));
+    const oldid = JSON.parse(e.dataTransfer.getData("oldid"));
 
     // Find item to drop before / after
     const findItem = findItemRecursive(editableElements, div.id);

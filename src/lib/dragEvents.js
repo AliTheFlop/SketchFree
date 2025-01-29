@@ -1,14 +1,23 @@
 import getElement from "./getElement";
 import makeid from "./makeid";
 
-// Set element to insert into dataTransfer when drag starts
+let dragSourceElement = null;
+
+// onDrag function that sets the element to be dragged
 function onDrag(e, type, editableElements) {
-    const elementData = getElement(e, type, makeid(7), editableElements);
-    e.dataTransfer.setData("element", JSON.stringify(elementData));
+    const elementData = getElement(e, type, editableElements);
+    const clonedElement = structuredClone(elementData);
+    dragSourceElement = e.target;
+    e.dataTransfer.setData("element", JSON.stringify(clonedElement));
+    e.dataTransfer.setData("oldid", JSON.stringify(e.target.id));
 }
 
+// handleHoverOverElement function that handles the hover over an element
 function handleHoverOverElement(e) {
     e.preventDefault();
+
+    if (e.target === dragSourceElement) return;
+
     const div = document.elementFromPoint(e.clientX, e.clientY);
     if (!div) return;
 
@@ -26,6 +35,7 @@ function handleHoverOverElement(e) {
     }
 }
 
+// handleHoverOutOfElemenet function that handles the hover out of an element
 function handleHoverOutOfElement(e) {
     e.preventDefault();
     const div = e.target;
